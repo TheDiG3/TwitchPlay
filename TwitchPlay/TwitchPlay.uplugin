@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 3,
+	"VersionName": "1.2",
+	"FriendlyName": "TwitchPlay",
+	"Description": "Adds support for Twitch Chat integration through IRC and Twitch Play functionalities. Use TwitchIRCComponent and TwitchPlayComponent to enable an object to communicate with Twitch.",
+	"Category": "TwitchPlay",
+	"CreatedBy": "Simone 'DiG' Di Gravio",
+	"CreatedByURL": "https://twitter.com/TheDiG3",
+	"DocsURL": "https://goo.gl/kjg3s0",
+	"MarketplaceURL": "https://www.unrealengine.com/marketplace/twitchplay-plugin",
+	"SupportURL": "https://twitter.com/TheDiG3",
+	"EngineVersion": "4.18.0",
+	"CanContainContent": false,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "TwitchPlay",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32"
+			]
+		}
+	]
+}
