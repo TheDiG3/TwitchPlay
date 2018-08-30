@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 3,
-	"VersionName": "1.3",
+	"VersionName": "1.4",
 	"FriendlyName": "TwitchPlay",
 	"Description": "Adds support for Twitch Chat integration through IRC and Twitch Play functionalities. Use TwitchIRCComponent and TwitchPlayComponent to enable an object to communicate with Twitch.",
 	"Category": "TwitchPlay",
@@ -12,6 +12,7 @@
 	"SupportURL": "https://twitter.com/TheDiG3",
 	"EngineVersion": "4.19.0",
 	"CanContainContent": false,
+	"IsBetaVersion": false,
 	"Installed": true,
 	"Modules": [
 		{
