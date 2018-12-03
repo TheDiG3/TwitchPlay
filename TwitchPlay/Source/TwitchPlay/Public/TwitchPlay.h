@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "ModuleManager.h"
+#include "Modules/ModuleManager.h"
 #include "Engine.h"
 
 class FTwitchPlayModule : public IModuleInterface

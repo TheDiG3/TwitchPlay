@@ -16,7 +16,7 @@
  * _message (const FString&) - Message received.
  * _username (const FString&) - Username of who sent the message.
  */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams( FMessageReceived , const FString& , _message , const FString& , _username );
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FMessageReceived, const FString&, _message, const FString&, _username);
 
 /**
  * Makes communication with Twitch IRC possible through UE4 sockets.
@@ -24,26 +24,26 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams( FMessageReceived , const FString& 
  * Subscribe to OnMessageReceived to know when a message has harrived.
  * Remember to first Connect(), SetUserInfo() and then AuthenticateTwitchIRC() before trying to send messages.
  */
-UCLASS( ClassGroup = ( TwitchAPI ) , meta = ( BlueprintSpawnableComponent ) )
+UCLASS(ClassGroup = (TwitchAPI), meta = (BlueprintSpawnableComponent))
 class TWITCHPLAY_API UTwitchIRCComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
 	// Event called each time a message is received
-	UPROPERTY( BlueprintAssignable , Category = "Message Events" )
+	UPROPERTY(BlueprintAssignable, Category = "Message Events")
 		FMessageReceived OnMessageReceived;
 
 	// Authentication token. Need to get it from official Twitch API
-	UPROPERTY( EditAnywhere , BlueprintReadWrite , Category = "Setup" )
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Setup")
 		FString oauth_token_;
 
 	// Username. Must be in lowercaps
-	UPROPERTY( EditAnywhere , BlueprintReadWrite , Category = "Setup" )
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Setup")
 		FString username_;
 
 	// Channel to join upon successful connection	
-	UPROPERTY( EditAnywhere , BlueprintReadWrite , Category = "Setup" )
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Setup")
 		FString channel_;
 
 private:
@@ -68,8 +68,8 @@ public:
 	 * @param _username - Username to login with. All low caps.
 	 * @param _channel - The channel to join upon connection.
 	 */
-	UFUNCTION( BlueprintCallable , Category = "Setup" )
-		void SetUserInfo( const FString _oauth , const  FString _username , const FString _channel );
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void SetUserInfo(const FString _oauth, const  FString _username, const FString _channel);
 
 	// Send a message on the connected socket
 	//
@@ -77,8 +77,8 @@ public:
 	// @param _channel - The channel (or user) to send this message to
 	//
 	// @return Whether the message was sent correctly
-	UFUNCTION( BlueprintCallable , Category = "Messages" )
-		bool SendIRCMessage( FString _message , UPARAM( DisplayName = "Send to channel" ) bool _b_send_to = true , FString _channel = "" );
+	UFUNCTION(BlueprintCallable, Category = "Messages")
+		bool SendIRCMessage(FString _message, UPARAM(DisplayName = "Send to channel") bool _b_send_to = true, FString _channel = "");
 
 	/**
 	 * Creates a socket and tries to connect to Twitch IRC server.
@@ -89,8 +89,8 @@ public:
 	 *
 	 * @return Whether the connection was created.
 	 */
-	UFUNCTION( BlueprintCallable , Category = "Setup" )
-		bool Connect( FString& _out_error );
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		bool Connect(FString& _out_error);
 
 	/**
 	 * Authenticates the connection to Twitch IRC servers.
@@ -100,8 +100,8 @@ public:
 	 *
 	 * @return Whether authentication succedeed or not.
 	 */
-	UFUNCTION( BlueprintCallable , Category = "Setup" )
-		bool AuthenticateTwitchIRC( FString& _out_error );
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		bool AuthenticateTwitchIRC(FString& _out_error);
 
 	/**
 	 * Receives data from the socket.
@@ -119,7 +119,7 @@ public:
 	 *
 	 * @return Parsed messages.
 	 */
-	TArray<FString> ParseMessage( const FString _message , TArray<FString>& _out_sender_username , bool _b_filter_user_only = false );
+	TArray<FString> ParseMessage(const FString _message, TArray<FString>& _out_sender_username, bool _b_filter_user_only = false);
 
 	// Handles closing the connection and freeing up the socket resources
 	virtual ~UTwitchIRCComponent();

@@ -12,7 +12,7 @@
  * _command_options (const TArray<FString>&) - Additional array of options for the command being invoked.
  * _sender_username (const FString&) - Username of who triggered the command.
  */
-DECLARE_DYNAMIC_DELEGATE_ThreeParams( FOnCommandReceived , const FString& , _command_name , const TArray<FString>& , _command_options , const FString& , _sender_username );
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FOnCommandReceived, const FString&, _command_name, const TArray<FString>&, _command_options, const FString&, _sender_username);
 
 
 /**
@@ -24,7 +24,7 @@ DECLARE_DYNAMIC_DELEGATE_ThreeParams( FOnCommandReceived , const FString& , _com
  * You can change the default characters for commands/options encapsulation via SetupEncasulationChars().
  * Remember to first Connect(), SetUserInfo() and then AuthenticateTwitchIRC() before trying to send messages.
  */
-UCLASS( ClassGroup = ( TwitchAPI ) , meta = ( BlueprintSpawnableComponent ) )
+UCLASS(ClassGroup = (TwitchAPI), meta = (BlueprintSpawnableComponent))
 class TWITCHPLAY_API UTwitchPlayComponent : public UTwitchIRCComponent
 {
 	GENERATED_BODY()
@@ -32,14 +32,14 @@ class TWITCHPLAY_API UTwitchPlayComponent : public UTwitchIRCComponent
 public:
 
 	// Character to use for command encapsulation. Commands will be read in the form CHAR_Command_CHAR (no spaces or underscores!)
-	UPROPERTY( EditAnywhere , BlueprintReadWrite , Category = "Commands Setup" )
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Commands Setup")
 		FString command_encapsulation_char_ = "!";
 
 	/**
 	 * Character to use for command options encapsulation. Commands will be read in the form CHAR_Option1[,Option2,..]_CHAR (no spaces or underscores!)
 	 * Multiple options can be specified and will be split into an FString array upon parsing
 	 */
-	UPROPERTY( EditAnywhere , BlueprintReadWrite , Category = "Commands Setup" )
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Commands Setup")
 		FString options_encapsulation_char_ = "#";
 
 private:
@@ -52,7 +52,7 @@ private:
 	 *
 	 * TODO: Unbind all events on component destruction? I don't know if it would generate memory leaks if not done
 	 */
-	TMap<FString , FOnCommandReceived> bound_events_;
+	TMap<FString, FOnCommandReceived> bound_events_;
 
 public:
 
@@ -67,8 +67,8 @@ public:
 	 * @param _command_char - Character(s) to use to encapsulate commands.
 	 * @param _options_char - Character(s) to use to encapsulate command options.
 	 */
-	UFUNCTION( BlueprintCallable , Category = "Commands Setup" )
-		void SetupEncapsulationChars( const FString _command_char , const FString _options_char );
+	UFUNCTION(BlueprintCallable, Category = "Commands Setup")
+		void SetupEncapsulationChars(const FString _command_char, const FString _options_char);
 
 	/**
 	 * Registers a command to receive an event whenever that command is called via chat.
@@ -83,8 +83,8 @@ public:
 	 *
 	 * @return Whether the registration was successfully completed.
 	 */
-	UFUNCTION( BlueprintCallable , Category = "Commands Setup" )
-		bool RegisterCommand( const FString _command_name , const FOnCommandReceived& _callback_function , FString& _out_result );
+	UFUNCTION(BlueprintCallable, Category = "Commands Setup")
+		bool RegisterCommand(const FString _command_name, const FOnCommandReceived& _callback_function, FString& _out_result);
 
 	/**
 	* Unregisters a command to stop receiving events whenever that command is called via chat.
@@ -96,8 +96,8 @@ public:
 	*
 	* @return Whether the unregistration was successfully completed.
 	*/
-	UFUNCTION( BlueprintCallable , Category = "Commands Setup" )
-		bool UnregisterCommand( const FString _command_name , FString& _out_result );
+	UFUNCTION(BlueprintCallable, Category = "Commands Setup")
+		bool UnregisterCommand(const FString _command_name, FString& _out_result);
 
 	virtual ~UTwitchPlayComponent();
 
@@ -113,7 +113,7 @@ private:
 	 * NOTE: Method must be marked as UFUNCTION in order to bind a dynamic delegate to it!
 	 */
 	UFUNCTION()
-		void MessageReceivedHandler( const FString& _message , const FString& _username );
+		void MessageReceivedHandler(const FString& _message, const FString& _username);
 
 	/**
 	 * Parses the message and returns any command associated with the message.
@@ -122,7 +122,7 @@ private:
 	 *
 	 * @return The command found, if any. Returns "" if no command was found.
 	 */
-	FString GetCommandString( const FString& _message ) const;
+	FString GetCommandString(const FString& _message) const;
 
 	/**
 	* Parses the message and returns any command options associated with the message.
@@ -131,7 +131,7 @@ private:
 	*
 	* @return The array of options found, if any. Returns an empty array if no command option was found.
 	*/
-	TArray<FString> GetCommandOptionsStrings( const FString& _message ) const;
+	TArray<FString> GetCommandOptionsStrings(const FString& _message) const;
 
 	/**
 	 * Gets the string delimited by the chosen delimiter string.
@@ -141,5 +141,5 @@ private:
 	 *
 	 * @return String delimited by the delimiters characters. Returns "" if no delimited string was found.
 	 */
-	FString GetDelimitedString( const FString& _in_string , const FString& _delimiter ) const;
+	FString GetDelimitedString(const FString& _in_string, const FString& _delimiter) const;
 };

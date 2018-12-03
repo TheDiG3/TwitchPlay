@@ -1,6 +1,6 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
-#include "../Public/TwitchPlay.h"
+#include "TwitchPlay.h"
 
 void FTwitchPlayModule::StartupModule()
 {}

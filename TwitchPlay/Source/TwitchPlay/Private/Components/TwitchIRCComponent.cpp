@@ -2,7 +2,7 @@
 
 #define DEBUG_MSG(msg) GEngine->AddOnScreenDebugMessage( -1 , 6 , FColor::Red , msg )
 
-#include "TwitchIRCComponent.h"
+#include "Components/TwitchIRCComponent.h"
 #include <string>
 
 // Sets default values for this component's properties
@@ -33,7 +33,7 @@ bool UTwitchIRCComponent::SendIRCMessage(FString _message, bool _b_send_to, FStr
 		TCHAR* serialized_message = _message.GetCharArray().GetData();
 		int32 size = FCString::Strlen(serialized_message);
 		int32 out_sent;
-		return connection_socket_->Send((uint8*) TCHAR_TO_UTF8(serialized_message), size, out_sent);
+		return connection_socket_->Send((uint8*)TCHAR_TO_UTF8(serialized_message), size, out_sent);
 	}
 	else
 	{
